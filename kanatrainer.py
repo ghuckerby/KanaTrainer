@@ -1,3 +1,8 @@
+import random
+
+points = 0
+streak = 0
+higheststreak = 0
 
 hiragana = {
     "あ":"a", "い":"i", "う":"u", "え":"e", "お":"o",
@@ -26,3 +31,41 @@ katakana = {
     "ン":"n",
 }
 
+selection = "K"
+
+while (selection.upper() != "N"):
+
+    selection = input("Katakana (K), Hiragana(H) or Stop(N)?")
+
+    if selection.upper() == "K":
+
+        kana, romaji = random.choice(list(katakana.items()))
+        answer = input("What's the romaji for: ", kana)
+        if (answer.lower() == romaji):
+            print("Correct!")
+            points += 1
+            streak += 1
+            if streak > higheststreak:
+                higheststreak = streak
+            print("Points: ", points, "Streak: ", streak, "Highest streak: ", higheststreak)
+        else:
+            print("Incorrect, no points!")
+            print("Your streak has been reset!")
+
+    elif selection.upper() == "H":
+
+        kana, romaji = random.choice(list(hiragana.items()))
+        answer = input("What's the romaji for: ", kana)
+        if (answer.lower() == romaji):
+            print("Correct!")
+            points += 1
+            streak += 1
+            if streak > higheststreak:
+                higheststreak = streak
+            print("Points: ", points, "Streak: ", streak, "Highest streak: ", higheststreak)
+        else:
+            print("Incorrect, no points!")
+            print("Your streak has been reset!")
+
+print("You got: ", points, "points!")
+print("Your highest streak was: ", higheststreak, "!")
