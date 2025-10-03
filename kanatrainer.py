@@ -31,41 +31,35 @@ katakana = {
     "ン":"n",
 }
 
-selection = "K"
+while True:
+    selection = input("Katakana (K), Hiragana(H) or Stop(N)?: ").strip().upper()
 
-while (selection.upper() != "N"):
+    if selection == "N":
+        break
 
-    selection = input("Katakana (K), Hiragana(H) or Stop(N)?")
+    if selection == "K":
+        pool = katakana
+    elif selection == "H":
+        pool = hiragana
+    else:
+        print("Please enter K, H, or N.")
+        continue
 
-    if selection.upper() == "K":
+    kana, romaji = random.choice(list(pool.items()))
+    answer = input(f"What's the romaji for: {kana} ?: ").strip().lower()
 
-        kana, romaji = random.choice(list(katakana.items()))
-        answer = input("What's the romaji for: ", kana)
-        if (answer.lower() == romaji):
-            print("Correct!")
-            points += 1
-            streak += 1
-            if streak > higheststreak:
-                higheststreak = streak
-            print("Points: ", points, "Streak: ", streak, "Highest streak: ", higheststreak)
-        else:
-            print("Incorrect, no points!")
-            print("Your streak has been reset!")
+    if answer == romaji:
+        print("Correct!")
+        points += 1
+        streak += 1
+        if streak > higheststreak:
+            higheststreak = streak
+    
+    else:
+        print(f"Incorrect. The correct answer was '{romaji}'.")
+        streak = 0
 
-    elif selection.upper() == "H":
+    print(f"Points: {points} | Streak: {streak} | Highest streak: {higheststreak}")
 
-        kana, romaji = random.choice(list(hiragana.items()))
-        answer = input("What's the romaji for: ", kana)
-        if (answer.lower() == romaji):
-            print("Correct!")
-            points += 1
-            streak += 1
-            if streak > higheststreak:
-                higheststreak = streak
-            print("Points: ", points, "Streak: ", streak, "Highest streak: ", higheststreak)
-        else:
-            print("Incorrect, no points!")
-            print("Your streak has been reset!")
-
-print("You got: ", points, "points!")
-print("Your highest streak was: ", higheststreak, "!")
+print(f"Points total: {points} points!")
+print(f"Your highest streak was :{higheststreak}!")
